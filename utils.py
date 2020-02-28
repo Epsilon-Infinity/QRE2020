@@ -26,7 +26,16 @@ def solve_files(dir, solver):
     result_dir = os.path.join(dir, "..", "result")
     if not os.path.exists(result_dir):
         os.makedirs(result_dir)
-    for file in ['a_example.txt']:
+
+    files = [
+        # 'a_example.txt',
+        # 'b_read_on.txt',
+        'c_incunabula.txt',
+        # 'd_tough_choices.txt',
+        # 'e_so_many_books.txt',
+        # 'f_libraries_of_the_world.txt'
+    ]
+    for file in files:
         if not file.endswith('.txt'):
             continue
         print("Solving file :", file)

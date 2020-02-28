@@ -6,9 +6,17 @@ class Library:
         self.signup_days = signup_days
         self.book_p_day = book_p_day
 
-    def score(self, books_so_far):
-        possible_reward = sum([self.books[id] for id in self.books.keys() if id not in books_so_far])
-        return possible_reward * self.book_p_day / self.signup_days
+    def remove_duplicates(self, books_so_far, days_left):
+        no_duplicates = {key: val for key,
+                      val in self.books.items() if key not in books_so_far}
+
+        sorted_nd = sorted(no_duplicates.items(), key = lambda x: x[1], reverse=True)[:max(0,days_left)*self.book_p_day]
+        self.books = dict(sorted_nd)
+
+    def score(self, books_so_far, penalty = 1):
+        possible_reward = sum(
+            [self.books[id] for id in self.books.keys() if id not in books_so_far])
+        return possible_reward * self.book_p_day / self.signup_days**penalty
 
     def score2(self, books_so_far, days_left):
         books = sorted(self.books.items(), key=lambda x: x[1], reverse=True)

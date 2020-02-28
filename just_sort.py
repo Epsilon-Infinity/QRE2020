@@ -8,15 +8,11 @@ from collections import defaultdict
 def solver(inputs):
     books_so_far = set()
     libraries = inputs["libraries"]
-    result = []
 
-    while len(libraries)>0:
-        libraries = sorted(libraries, key=lambda x: x.score(books_so_far, penalty=2))
-        result.append(libraries[-1])
-        books_so_far.update(libraries[-1].books.keys())
-        libraries.pop(-1)
+    # sort libraries
+    libraries = sorted(libraries, key=lambda x: x.score(books_so_far))
 
-    return result
+    return libraries
 
 
 if __name__ == "__main__":
